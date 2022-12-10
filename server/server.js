@@ -13,7 +13,7 @@ const {bot} = require('../helpers/bot');
 class Server{
     constructor(){
         this.app= express();
-        this.port=process.env.PORT;
+        this.port=process.env.PORT||8081;
 
         this.usuariosPath='/api/usuarios';
         this.authPath='/api/auth';
