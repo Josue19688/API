@@ -3,14 +3,12 @@ const path = require('path');
 const fs = require('fs');
 const { subirArchivo } = require("../helpers/subir-archivo");
 const Usuario = require('../models/usuarios.models');
+const BotPost =  require('../models/bot.models');
 
 const cargarArchivo=async(req, res=response)=>{
 
 
     try {
-
-
-
         const pathCompleto = await subirArchivo(req.files,['pdf'],'usuarios');
 
         res.json({
@@ -93,7 +91,65 @@ const actualizarImagen=async(req, res=response)=>{
    
 }
 
+const mostrarImagen=async(req,res=response)=>{
 
+    const{id, coleccion} = req.params;
+
+
+    let modelo;
+
+    switch (coleccion) {
+        case 'usuarios':
+            modelo=await Usuario.findById(id);
+            if(!modelo){
+                return res.status(400).json({
+                    msg:`No existe usuario con el id :  ${id}`
+                })
+            }
+            
+            break;
+        case 'post':
+            modelo=await BotPost.findById(id);
+            if(!modelo){
+                return res.status(400).json({
+                    msg:`No existe usuario con el id :  ${id}`
+                })
+            }
+                
+            break;
+        default:
+            return res.status(500).json({
+                msg:`Se me olvido olvidar esto`
+            })
+            break;
+    }
+
+    try {
+
+        //TODO: Eliminar imagenes previas
+
+        if(modelo.img){
+            const pathImagen=path.join(__dirname,'../uploads',coleccion,modelo.img);
+            if(fs.existsSync(pathImagen)){
+                return res.sendFile(pathImagen);
+            }
+        }
+        
+        
+        const placeholder=path.join(__dirname,'../assets/no-image.webp');
+        return res.sendFile(placeholder);
+        
+
+        
+        
+
+    } catch (error) {
+        return res.status(400).json({
+            msg:'No se pudo subir el archivo'
+        });
+    }
+
+}
 
 
 
@@ -101,5 +157,6 @@ const actualizarImagen=async(req, res=response)=>{
 
 module.exports={
     cargarArchivo,
-    actualizarImagen
+    actualizarImagen,
+    mostrarImagen
 }

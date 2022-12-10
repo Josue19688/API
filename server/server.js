@@ -8,6 +8,7 @@ const fileUpload=require('express-fileupload');
 const {dbConnection} = require('../config/mongo.db');
 const db = require('../config/mysql.db');
 
+const {bot} = require('../helpers/bot');
 
 class Server{
     constructor(){
@@ -17,6 +18,7 @@ class Server{
         this.usuariosPath='/api/usuarios';
         this.authPath='/api/auth';
         this.cargarArchivosPath='/api/uploads';
+        this.postPath='/api/post';
 
         //conexion a mongo db
         this.conectarDB();
@@ -34,7 +36,7 @@ class Server{
         // db.sync()
         //     .then(()=>console.log('Conectado a la db'))
         //     .catch(error=>console.log(error));
-        
+        bot();
         this.app.use(express.json());
         this.app.use(cors({origin:true,credentials:true}));
         this.app.use(express.static('public'));
@@ -50,6 +52,7 @@ class Server{
         this.app.use(this.authPath,require('../routes/auth.routes'));
         this.app.use('/api/usuario',require('../routes/usuario.routes'));
         this.app.use(this.cargarArchivosPath,require('../routes/uploads.routes'));
+        this.app.use(this.postPath,require('../routes/post.routes'));
         
     }
     
