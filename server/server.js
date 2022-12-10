@@ -6,7 +6,7 @@ const fileUpload=require('express-fileupload');
 
 //CONEXIONES A BASE DE DATOS
 const {dbConnection} = require('../config/mongo.db');
-const db = require('../config/mysql.db');
+//const db = require('../config/mysql.db');
 
 const {bot} = require('../helpers/bot');
 
