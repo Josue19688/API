@@ -8,7 +8,7 @@ const path = require('path');
 
 const BotPost =  require('../models/bot.models');
 
-const botReporte = async () => {
+const bot = async () => {
 
   //solo para pruebas
   //const token='5720836257:AAHDrFth5mHYfx9DXKxo_CXtETzNL3ftLPk';
@@ -274,4 +274,4 @@ const botReporte = async () => {
 
 };
 
-module.exports = { botReporte };
+module.exports = { bot };

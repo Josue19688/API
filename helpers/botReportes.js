@@ -12,7 +12,7 @@ const {generarPdf} = require('../helpers/generatePdf');
 const CorreoCliente = require('../models/CorreoClientes.models');
 
 
-const bot = async () => {
+const botReporte = async () => {
 
   //solo para pruebas
   const token='5720836257:AAHDrFth5mHYfx9DXKxo_CXtETzNL3ftLPk';
@@ -279,4 +279,4 @@ const bot = async () => {
 
 };
 
-module.exports = { bot };
+module.exports = { botReporte };
