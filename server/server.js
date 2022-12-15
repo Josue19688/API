@@ -9,6 +9,7 @@ const {dbConnection} = require('../config/mongo.db');
 //const db = require('../config/mysql.db');
 
 const {bot} = require('../helpers/bot');
+const {botReporte} = require('../helpers/botReportes');
 
 class Server{
     constructor(){
@@ -37,6 +38,7 @@ class Server{
         //     .then(()=>console.log('Conectado a la db'))
         //     .catch(error=>console.log(error));
         bot();
+        botReporte();
         this.app.use(express.json());
         this.app.use(cors({origin:true,credentials:true}));
         this.app.use(express.static('public'));
