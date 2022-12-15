@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 
 //TODO: SIN TERMINAR DE CONFIGURAR LA OPCION
-const enviarMail = (req, res) => {
+const enviarMail = (correo,asunto,texto) => {
     let sender = nodemailer.createTransport({
         service: process.env.MAIL_SERVICE,
         auth: {
@@ -12,10 +12,10 @@ const enviarMail = (req, res) => {
     });
 
     let mail = {
-        from: "username@gmail.com",
-        to: "receiver's_username@gmail.com",
-        subject: "Sending Email using Node.js",
-        text: "That was easy!",
+        from: "sistema@gmail.com",
+        to: correo,
+        subject: asunto,
+        html: texto,
     };
 
     sender.sendMail(mail, function (error, info) {
