@@ -20,6 +20,8 @@ class Server{
         this.authPath='/api/auth';
         this.cargarArchivosPath='/api/uploads';
         this.postPath='/api/post';
+        this.categoryPath='/api/category';
+        this.productosPath='/api/producto';
 
         //conexion a mongo db
         this.conectarDB();
@@ -37,8 +39,8 @@ class Server{
         // db.sync()
         //     .then(()=>console.log('Conectado a la db'))
         //     .catch(error=>console.log(error));
-        bot();
-        botReporte();
+        // bot();
+        // botReporte();
         this.app.use(express.json());
         this.app.use(cors({origin:true,credentials:true}));
         this.app.use(express.static('public'));
@@ -55,6 +57,8 @@ class Server{
         this.app.use('/api/usuario',require('../routes/usuario.routes'));
         this.app.use(this.cargarArchivosPath,require('../routes/uploads.routes'));
         this.app.use(this.postPath,require('../routes/post.routes'));
+        this.app.use(this.categoryPath,require('../routes/category.routes'));
+        this.app.use(this.productosPath,require('../routes/producto.routes'));
         
     }
     

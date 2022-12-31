@@ -14,10 +14,7 @@ const CorreoCliente = require('../models/CorreoClientes.models');
 
 const botReporte = async () => {
 
-  //solo para pruebas
-  const token='5720836257:AAHDrFth5mHYfx9DXKxo_CXtETzNL3ftLPk';
-  //const token = '5351040426:AAFGM1YN-SfAuQcgBMsz_tdrA-6p8OYQUuI';
-  //const token = "2145537077:AAGudtb06BBzj5-L6aSCqwCU0FazL4bOGX0"; este es para otro
+  
   const bot = new TelegramBot(token, { polling: true });
 
   bot.onText(/^\/start/, function(msg){
